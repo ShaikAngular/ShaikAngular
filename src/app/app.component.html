@@ -69,24 +69,45 @@
         <table class="table table-bordered table-striped table-success">
             <thead>
                 <tr>
+                    <th>Selection</th>
                     <th>USER ID</th>
                     <th>FIRST NAME</th>
                     <th>LAST NAME</th>
                     <th>PHONE NUMBER</th>
                     <th>MAIL ID</th>
                     <th>Edit / Update</th>
-                    
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <!-- <tr *ngFor="let data of userData?.users"> -->
                 <tr *ngFor="let data of userData ">
+                    <th>
+                        <input type="checkbox" (click)="update($event,data)">
+                    </th>
                     <td>{{ data.userId }}</td>
                     <td>{{ data.firstName }}</td>
                     <td>{{ data.lastName }}</td>
                     <td>{{ data.phoneNumber }}</td>
                     <td>{{ data.emailAddress }}</td>
                     <td><button class="btn btn-info" (click)="update($event,data)">Update</button></td>
+                    <td>
+                        <div class="btn-group" dropdown>
+                            <button id="button-basic" dropdownToggle type="button" class="btn btn-info dropdown-toggle"
+                                    aria-controls="dropdown-basic">
+                              <span class="caret"></span>
+                            </button>
+                            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                                role="menu" aria-labelledby="button-basic">
+                              <li role="menuitem"><a class="dropdown-item"(click)="update($event,data)" href="">Action</a></li>
+                              <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+                              <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+                              <li class="divider dropdown-divider"></li>
+                              <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
+                              </li>
+                            </ul>
+                          </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
