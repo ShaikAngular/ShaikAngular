@@ -1,0 +1,36 @@
+<p>validate works!</p>
+
+<div>
+    hello{{tableData |json}}  {{a}}
+</div>
+
+<div class="container">
+    <div class="col">
+        <table class="table table-bordered table-striped table-success">
+            <thead>
+                <tr>
+                    
+                    <th>USER ID</th>
+                    <th>FIRST NAME</th>
+                    <th>LAST NAME</th>
+                    <th>PHONE NUMBER</th>
+                    <th>MAIL ID</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <!-- <tr *ngFor="let data of userData?.users"> -->
+                <tr *ngFor="let data of tableData ">
+                
+                    <td>{{ data.userId }}</td>
+                    <td>{{ data.firstName }}</td>
+                    <td>{{ data.lastName }}</td>
+                    <td>{{ data.phoneNumber }}</td>
+                    <td>{{ data.emailAddress }}</td>
+                
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

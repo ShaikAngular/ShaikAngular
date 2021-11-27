@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
@@ -13,6 +14,14 @@ export class UsersService {
       'Content-Type':  'application/json'
     })
   };
+
+  userDataSubject =new Subject<any>(); 
+
+  passValue(data) {
+    //passing the data as the next observable
+    this.userDataSubject.next(data);
+  }
+
   getUsers(){
     return this.httpClient.get<Users>(`../assets/a.json`)
     // return this.httpClient.get<Users>(`../assets/users/users.json`)

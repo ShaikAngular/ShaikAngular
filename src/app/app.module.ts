@@ -6,13 +6,16 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { ValidateComponent } from './validate/validate.component';
+import { MainComponent } from './main/main.component';
+import { UsersService } from 'src/services/users.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ValidateComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BrowserAnimationsModule,
     BsDropdownModule.forRoot()
   ],
-  providers: [],
+  providers: [UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
