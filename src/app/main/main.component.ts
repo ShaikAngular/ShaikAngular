@@ -10,10 +10,12 @@ import {
 import { concat, forkJoin, from, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Users, UsersService } from 'src/services/users.service';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
+  
 })
 export class MainComponent implements OnInit {
      
@@ -22,6 +24,8 @@ export class MainComponent implements OnInit {
   id: any;
   createRow = [];
   filterEnable = false;
+  selectedColumn;
+  filterData;
   columnData =[
     {
       isChecked:false,
@@ -163,21 +167,25 @@ export class MainComponent implements OnInit {
   }
   
   applyFilter(){
-    let selectedColumn = this.columnData.filter(a=>a.isChecked)
+    this.selectedColumn = this.columnData.filter(a=>a.isChecked)
     
-    if(selectedColumn.length>0){
-      console.log("161",this.columnData, "selectedcolumn",selectedColumn[0].key)
-      let filterData = this.userData.filter(a=>
+    if(this.selectedColumn.length>0){
+      console.log("161",this.columnData, "selectedcolumn",this.selectedColumn[0].key)
+      this.filterData = this.userData.filter(a=>
         {
-          if(a[selectedColumn[0].key] == selectedColumn[0].selectedData
+          if(a[this.selectedColumn[0].key] == this.selectedColumn[0].selectedData
             ){
-              return a
+              return a;
           }
         
         })
-      console.log("filterData",filterData)
-      this.userData = filterData
+      console.log("filterData", this.filterData)
+      this.userData =  this.filterData
     }
+  }
+
+  resetFilter(){
+   this.apiCall();
   }
 
   update(e:any,rowData:any){
