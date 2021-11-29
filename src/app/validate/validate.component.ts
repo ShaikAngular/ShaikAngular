@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UsersService } from 'src/services/users.service';
 
@@ -7,25 +7,19 @@ import { UsersService } from 'src/services/users.service';
   templateUrl: './validate.component.html',
   styleUrls: ['./validate.component.scss']
 })
-export class ValidateComponent implements OnInit {
+export class ValidateComponent implements OnInit,OnDestroy {
 
-tableData :any ;
+tableData :any;
 a="hai";
   constructor(private service: UsersService) { 
       
   }
 
   ngOnInit(): void {
-    this.service.userDataSubject.subscribe(res=>{
-      console.log("res",res);
-      //alert("res"+res)
-      if(res){
-        // this.tableData.push(res);
-        this.tableData = res;
-        console.log("table data",this.tableData)
-      }
-      alert("table data"+this.tableData)
-    })
+    this.tableData = this.service.userDataSubject.value
+   }
+  ngOnDestroy(){
+    this.service.userDataSubject.next({})
   }
 
 }

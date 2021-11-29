@@ -70,6 +70,11 @@
             <!-- <button class="btn btn-info" [routerLink]="'/ValidateComponent'" >Validate</button> -->
             <button class="btn btn-info" (click)="validateScreen()">Validate</button>
         </div>
+
+        <div class="col-10 " style="padding-left: 925px;" >
+            <!-- <button class="btn btn-info" [routerLink]="'/ValidateComponent'" >Validate</button> -->
+            <button class="btn btn-info " >Filter Configuration</button>
+        </div>
     </div>
 
     <div class="col">
@@ -90,7 +95,7 @@
                 <!-- <tr *ngFor="let data of userData?.users"> -->
                 <tr *ngFor="let data of userData ">
                     <th>
-                        <input type="checkbox" (click)="clickCheckbox(data)">
+                        <input type="checkbox" (click)="clickCheckbox(data,$event)"  >
                     </th>
                     <td>{{ data.userId }}</td>
                     <td>{{ data.firstName }}</td>

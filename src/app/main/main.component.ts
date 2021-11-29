@@ -21,7 +21,8 @@ export class MainComponent implements OnInit {
   testForm : FormGroup = new FormGroup({});
   userData: any;
   id: any;
-  createRow;
+  createRow = [];
+   //checked = false;
   constructor(private service:UsersService,private fb: FormBuilder,private router:Router){
     // this.testForm = new FormGroup({})
     this.testForm = this.fb.group({
@@ -37,15 +38,29 @@ export class MainComponent implements OnInit {
     this.apiCall1();
   }
 
-   clickCheckbox(d){
-    console.log("data",d);
-    this.createRow = d;
-   }
+   clickCheckbox(d,e){
+     console.log("e",e.target.checked)
+     const status = e.target.checked
+    if(status ==true){
+      console.log("data",d);
+      // this.createRow = d;
+      this.createRow.push(d)
+    }
+    if(status == false){
+      console.log("before pop",this.createRow);
+      this.createRow.pop()
+      console.log("after pop",this.createRow);
+    }
+  }
 
    validateScreen(){
-    this.router.navigateByUrl('/ValidateComponent')
-    this.service.passValue(this.createRow);
+    if(this.createRow){
+      this.service.passValue(this.createRow);
+    } else {
+      alert("select atleast one row")
     }
+    this.router.navigateByUrl('/ValidateComponent')
+  }
 
    
   apiCall()

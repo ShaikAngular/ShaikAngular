@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -15,11 +16,12 @@ export class UsersService {
     })
   };
 
-  userDataSubject =new Subject<any>(); 
-
-  passValue(data) {
+  userDataSubject =new BehaviorSubject<any>({}); 
+ 
+  passValue(data:any) {
     //passing the data as the next observable
     this.userDataSubject.next(data);
+    
   }
 
   getUsers(){
