@@ -9,19 +9,57 @@ import {
     FormBuilder} from '@angular/forms';
 import { concat, forkJoin, from, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import { UsersService } from 'src/services/users.service';
+import { Users, UsersService } from 'src/services/users.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-
- 
+     
   testForm : FormGroup = new FormGroup({});
   userData: any;
   id: any;
   createRow = [];
+  filterEnable = false;
+  columnData =[
+    {
+      isChecked:false,
+      name:'USER ID',
+      key:'userId',
+      data:[],
+      selectedData:{}
+    },
+    {
+      isChecked:false,
+      name:'FIRST NAME',
+      data:[],
+      key:'firstName',
+      selectedData:{}
+    },
+    {
+      isChecked:false,
+      name:'LAST NAME',
+      data:[],
+      key:'lastName',
+      selectedData:{}
+    },
+    {
+      isChecked:false,
+      name:'PHONE NUMBER',
+      data:[],
+      key:'phoneNumber',
+      selectedData:{}
+    },
+    {
+      isChecked:false,
+      name:'MAIL ID',
+      data:[],
+      key:'emailAddress',
+      selectedData:{}
+    }
+
+  ]
    //checked = false;
   constructor(private service:UsersService,private fb: FormBuilder,private router:Router){
     // this.testForm = new FormGroup({})
@@ -54,27 +92,57 @@ export class MainComponent implements OnInit {
   }
 
    validateScreen(){
+     const filt = this.userData.filter(a=>
+            {
+              console.log(a,"a");
+            return a.isSelected;
+          }
+      )
+      console.log("filet",filt)
+      this.createRow = filt
     if(this.createRow){
       this.service.passValue(this.createRow);
     } else {
       alert("select atleast one row")
     }
     this.router.navigateByUrl('/ValidateComponent')
+    console.log("user data",this.userData)
   }
 
-   
   apiCall()
   {
-  this.service.getUsers().
-      subscribe(item=>
-      {
-        this.userData = item;
-        this.ls();
-        // this.userData = item.users;
-        console.log("item",item)
-      })
+  this.service.getUsers().subscribe(res=>{
+    console.log(res);
+    let response1:any= res;
+    response1.map(a=>{
+      a.isSelected = false;
+      return a;
+    }
+    )
+    console.log(response1,"75")
+    this.columnData[0].data = response1.map(a=>a.userId) ;
+    this.columnData[1].data = response1.map(a=>a.firstName) 
+    this.columnData[2].data = response1.map(a=>a.lastName) 
+    this.columnData[3].data = response1.map(a=>a.phoneNumber) 
+    this.columnData[4].data = response1.map(a=>a.emailAddress) 
+    this.userData = response1;
+    console.log(this.userData,"this.userData"," this.columnData", this.columnData)
+  })
+      
    console.log("user data",this.userData)
     }
+  // apiCall()
+  // {
+  // this.service.getUsers().
+  //     subscribe(item=>
+  //     {
+  //       this.userData = item;
+  //       this.ls();
+  //       // this.userData = item.users;
+  //       console.log("item",item)
+  //     })
+  //  console.log("user data",this.userData)
+  //   }
 
   apiCall1(){
     // this.service.getUsers().forEach(item=>
@@ -92,6 +160,24 @@ export class MainComponent implements OnInit {
         }
       ))
     //  .subscribe(res=>this.id=res)
+  }
+  
+  applyFilter(){
+    let selectedColumn = this.columnData.filter(a=>a.isChecked)
+    
+    if(selectedColumn.length>0){
+      console.log("161",this.columnData, "selectedcolumn",selectedColumn[0].key)
+      let filterData = this.userData.filter(a=>
+        {
+          if(a[selectedColumn[0].key] == selectedColumn[0].selectedData
+            ){
+              return a
+          }
+        
+        })
+      console.log("filterData",filterData)
+      this.userData = filterData
+    }
   }
 
   update(e:any,rowData:any){

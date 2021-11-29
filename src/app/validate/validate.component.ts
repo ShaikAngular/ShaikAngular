@@ -18,6 +18,10 @@ a="hai";
   ngOnInit(): void {
     this.tableData = this.service.userDataSubject.value
    }
+
+   validatData(){
+     console.log("post data for validation",this.tableData)
+   }
   ngOnDestroy(){
     this.service.userDataSubject.next({})
   }
