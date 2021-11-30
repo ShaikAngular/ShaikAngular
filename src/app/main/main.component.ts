@@ -105,13 +105,15 @@ export class MainComponent implements OnInit {
             return a.isSelected;
           }
       )
-      console.log("filet",filt)
-      this.createRow = filt
-    if(this.createRow){
+    console.log("filet",filt);
+    this.createRow = filt;
+    if(this.createRow.length){
       this.service.passValue(this.createRow);
     } else {
-      alert("select atleast one row")
-    }
+      alert ("select atleast one row");
+      return
+    } 
+   
     this.router.navigateByUrl('/ValidateComponent')
     console.log("user data",this.userData)
   }
@@ -124,7 +126,7 @@ export class MainComponent implements OnInit {
     response1.map(a=>{
       a.isSelected = false;
       return a;
-    }
+     }
     )
     console.log(response1,"75")
     this.columnData[0].data = response1.map(a=>a.userId) ;
@@ -134,10 +136,10 @@ export class MainComponent implements OnInit {
     this.columnData[4].data = response1.map(a=>a.emailAddress) 
     this.userData = response1;
     console.log(this.userData,"this.userData"," this.columnData", this.columnData)
-  })
+     })
       
    console.log("user data",this.userData)
-    }
+  }
   // apiCall()
   // {
   // this.service.getUsers().
