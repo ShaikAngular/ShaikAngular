@@ -99,10 +99,10 @@ export class MainComponent implements OnInit {
   }
 
    validateScreen(){
-     const filt = this.userData.filter(a=>
+    const filt = this.userData.filter(a=>
             {
               console.log(a,"a");
-            return a.isSelected;
+              return a.isSelected;
           }
       )
     console.log("filet",filt);
@@ -110,12 +110,12 @@ export class MainComponent implements OnInit {
     if(this.createRow.length){
       this.service.passValue(this.createRow);
     } else {
-      alert ("select atleast one row");
-      return
-    } 
+             alert ("select atleast one row");
+             return;
+           } 
    
     this.router.navigateByUrl('/ValidateComponent')
-    console.log("user data",this.userData)
+    console.log("user data",this.userData);
   }
 
   apiCall()
@@ -130,15 +130,14 @@ export class MainComponent implements OnInit {
     )
     console.log(response1,"75")
     this.columnData[0].data = response1.map(a=>a.userId) ;
-    this.columnData[1].data = response1.map(a=>a.firstName) 
-    this.columnData[2].data = response1.map(a=>a.lastName) 
-    this.columnData[3].data = response1.map(a=>a.phoneNumber) 
-    this.columnData[4].data = response1.map(a=>a.emailAddress) 
+    this.columnData[1].data = response1.map(a=>a.firstName);
+    this.columnData[2].data = response1.map(a=>a.lastName);
+    this.columnData[3].data = response1.map(a=>a.phoneNumber); 
+    this.columnData[4].data = response1.map(a=>a.emailAddress);
     this.userData = response1;
-    console.log(this.userData,"this.userData"," this.columnData", this.columnData)
+    console.log(this.userData,"this.userData"," this.columnData", this.columnData);
      })
-      
-   console.log("user data",this.userData)
+  console.log("user data",this.userData);
   }
   // apiCall()
   // {
@@ -173,9 +172,8 @@ export class MainComponent implements OnInit {
   
   applyFilter(){
     this.selectedColumn = this.columnData.filter(a=>a.isChecked)
-    
     if(this.selectedColumn.length>0){
-      console.log("161",this.columnData, "selectedcolumn",this.selectedColumn[0].key)
+      console.log("177",this.columnData, "selectedcolumn",this.selectedColumn[0].key);
       this.filterData = this.userData.filter(a=>
         {
           if(a[this.selectedColumn[0].key] == this.selectedColumn[0].selectedData
@@ -184,8 +182,8 @@ export class MainComponent implements OnInit {
           }
         
         })
-      console.log("filterData", this.filterData)
-      this.userData =  this.filterData
+      console.log("filterData", this.filterData);
+      this.userData =  this.filterData;
     }
   }
 
@@ -194,12 +192,12 @@ export class MainComponent implements OnInit {
   }
 
   update(e:any,rowData:any){
-    console.log("e",e,"data",rowData)
-    alert("Row id:"+rowData.userId +"   "+"First Name:"+rowData.firstName)
+    console.log("e",e,"data",rowData);
+    alert("Row id:"+rowData.userId +"   "+"First Name:"+rowData.firstName);
   }
 
   postData(){
-    console.log("post")
+    console.log("post");
     const req ={
       userId : this.testForm.get('userId')?.value,
       firstName: this.testForm.get('firstName')?.value,
@@ -207,7 +205,7 @@ export class MainComponent implements OnInit {
       phoneNumber: this.testForm.get('phoneNumber')?.value,
       emailAddress: this.testForm.get('mailId')?.value
     }
-    console.log("post req",req)
+    console.log("post req",req);
     //alert("user id:" + req.userId + " " + "First Name:" + req.firstName)
   //  this.service.postUsers(req);
     //this.testForm.reset();
