@@ -26,6 +26,9 @@ export class MainComponent implements OnInit {
   filterEnable = false;
   selectedColumn;
   filterData;
+  alert =false;
+  isOpen = false;
+  dismissible = true;
   columnData =[
     {
       isChecked:false,
@@ -233,6 +236,7 @@ export class MainComponent implements OnInit {
   }
 // FlatMap / mergeMap - Instantly generates an Observable for any source item, all previous Observables are preserved
   public mm() {
+    this.alert = true;
     this.example(mergeMap); // Output: 0 - 4 fast
   }
   public fm() {

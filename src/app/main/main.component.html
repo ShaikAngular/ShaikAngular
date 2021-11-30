@@ -169,3 +169,15 @@
     <button class="btn-primary"  (click)='fj()'>forkjoin</button>
 </div>
 
+<div class="col-3 alert alert-primary alert-dismissible " role="alert" *ngIf="alert">
+    This is a primary Bootstrap alert—check it out!
+</div>
+
+<div class="col-3" *ngIf="alert">
+    <alert *ngIf="isOpen" type="success" [dismissible]="dismissible" dismissOnTimeout="5000" (onClosed)="isOpen = false">
+        Will close after 5 sec timeout
+      </alert>
+    <button type="button" class="btn btn-primary" (click)="isOpen = true">Show NGX Alert</button>  
+</div>
+
+
