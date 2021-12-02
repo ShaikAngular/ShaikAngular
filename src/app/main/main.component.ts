@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
   id: any;
   createRow = [];
   filterEnable = false;
-  selectedColumn;
+  // selectedColumn;
   filterData;
   alert =false;
   isOpen = false;
@@ -135,7 +135,7 @@ export class MainComponent implements OnInit {
     this.columnData[3].data = response1.map(a=>a.phoneNumber); 
     this.columnData[4].data = response1.map(a=>a.emailAddress);
     this.userData = response1;
-    console.log(this.userData,"this.userData"," this.columnData", this.columnData);
+    console.log("this.userData-->",this.userData," this.columnData-->", this.columnData);
      })
   console.log("user data",this.userData);
   }
@@ -171,20 +171,50 @@ export class MainComponent implements OnInit {
   }
   
   applyFilter(){
-    this.selectedColumn = this.columnData.filter(a=>a.isChecked)
-    if(this.selectedColumn.length>0){
-      console.log("177",this.columnData, "selectedcolumn",this.selectedColumn[0].key);
+    const selectedColumn = this.columnData.filter(a=>a.isChecked)
+    console.log("selectedColumn",selectedColumn)
+    if(selectedColumn.length>0){
+      console.log("177",this.columnData, "selectedcolumn",selectedColumn[0].key);
       this.filterData = this.userData.filter(a=>
         {
-          if(a[this.selectedColumn[0].key] == this.selectedColumn[0].selectedData
-            ){
+          selectedColumn.forEach((element,i)=>{
+            if(a[selectedColumn[i].key] == selectedColumn[i].selectedData)
+            {
+              
+              console.log("a",a);
+              this.filterData = a
+              console.log("filterData", this.filterData);
               return a;
-          }
-        
+              
+             }
+          })
+          
         })
+       
       console.log("filterData", this.filterData);
-      this.userData =  this.filterData;
-    }
+      this.userData = [...this.filterData];
+    } 
+    // else if(selectedColumn.length>1)
+    // {
+    //    const lenSelectedColumn =  selectedColumn.length
+    //    console.log("lenSelectedColumn",lenSelectedColumn);
+    //    this.filterData = this.userData.filter(a=>
+    //     {
+    //       const arr1 = [];
+    //       selectedColumn.forEach((element,i) => {
+    //         console.log("element",element);
+    //         arr1.push({key:element.key,data:element.selectedData});
+    //         console.log("arr1",arr1)
+    //         if(a[selectedColumn[i].key] == selectedColumn[i].selectedData)
+    //         {
+    //           return a;
+    //          }
+    //         });
+    //         console.log("filterData", this.filterData);
+    //         this.userData =  this.filterData;
+    //       })
+          
+    // }
   }
 
   resetFilter(){
@@ -283,7 +313,7 @@ fj(){
   forkJoin(res1).subscribe(res=>console.log("fork join result", res))
 }
 
-//combileLatest
+//combineLatest
 cl(){
       const color = of('Black', 'Red', 'Blue');
       const brand = of('Jaguar', 'Ford', 'BMW');

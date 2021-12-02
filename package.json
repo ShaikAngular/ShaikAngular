@@ -23,6 +23,7 @@
     "jquery": "^3.6.0",
     "ngx-bootstrap": "^7.1.0",
     "@ng-select/ng-select": "6.0.0",
+    "ng2-pdf-viewer": "^7.0.1",
     "nvm": "0.0.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

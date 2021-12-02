@@ -1,0 +1,27 @@
+
+<h3><a routerLink="" routerLinkActive="active">Back</a></h3>
+<i class="material-icons-outlined">
+    arrow_back_ios
+</i>
+
+<div id="outerContainer">
+  <div class="pdf-container">
+    <pdf-viewer
+      [src]="'assets/pdf-test.pdf'"
+      [rotation]="0"
+      [original-size]="false"
+      [show-all]="true"
+      [fit-to-page]="false"
+      [zoom]="1"
+      [zoom-scale]="'page-width'"
+      [stick-to-page]="false"
+      [render-text]="true"
+      [external-link-target]="'blank'"
+      [autoresize]="true"
+      [show-borders]="false"
+      style="width: 750px; height: 500px"
+    ></pdf-viewer>
+  </div>
+</div>
+
+{{src1}}
