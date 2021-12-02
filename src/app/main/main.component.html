@@ -85,14 +85,12 @@
                         <tbody>
                             <tr *ngFor = "let column of columnData">
                                 <th>
-                                  <div class="d-flex justify-content-start"><input type="checkbox" [(ngModel)]="column.isChecked" style="width:auto;margin-right:10px; margin-top:8px" ><span>{{column.name}}</span> </div>  
-                                  
+                                  <div class="d-flex justify-content-start" ><input type="checkbox" [(ngModel)]="column.isChecked" style="width:auto;margin-right:10px; margin-top:8px;" ><span>{{column.name}}</span> </div>  
                                 </th>
                                 <th>
                                     <select [(ngModel)]="column.selectedData" class="form-control" style="width:150px; height: 35px;">
                                         <option *ngFor = "let dropdown of column.data">{{dropdown}}</option>
                                     </select>
-                                    
                                 </th>
                             </tr>
                                                       
@@ -123,8 +121,8 @@
             <tbody>
                 <!-- <tr *ngFor="let data of userData?.users"> -->
                 <tr *ngFor="let data of userData ">
-                    <th>
-                        <input type="checkbox"  [(ngModel)]="data.isSelected"  >
+                    <th style="text-align: center">
+                        <input type="checkbox"  [(ngModel)]="data.isSelected">
                     </th>
                     <td>{{ data.userId }}</td>
                     <td>{{ data.firstName }}</td>
@@ -167,6 +165,7 @@
     <button class="btn-danger"  (click)='of()'>of</button>
     <button class="btn-success"  (click)='from()'>from</button>
     <button class="btn-primary"  (click)='fj()'>forkjoin</button>
+    <button class="btn-info"    (click)='cl()'>combineLatest</button>
 </div>
 
 <div class="col-3 alert alert-primary alert-dismissible " role="alert" *ngIf="alert">

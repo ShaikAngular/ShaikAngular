@@ -7,7 +7,7 @@ import {
     FormControl,
     Validators,
     FormBuilder} from '@angular/forms';
-import { concat, forkJoin, from, Observable, of } from 'rxjs';
+import { combineLatest, concat, forkJoin, from, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { Users, UsersService } from 'src/services/users.service';
 
@@ -281,6 +281,19 @@ fj(){
   // const res = forkJoin([src1,src2,src3]).subscribe()
   console.log("fk result", res1)
   forkJoin(res1).subscribe(res=>console.log("fork join result", res))
+}
+
+//combileLatest
+cl(){
+      const color = of('Black', 'Red', 'Blue');
+      const brand = of('Jaguar', 'Ford', 'BMW');
+      const price = of(100, 200, 300);
+      const quantity = of(4,6,7)
+      const joinStream = combineLatest(color, brand, price);
+      console.log("combineLatest",joinStream);
+      const subscribe = joinStream.subscribe(([color, brand, price]) => {
+        console.log(color + ' ' + brand + ' ' + 'costed me' + ' ' + price );
+      })
 }
 
 // local storage (insert data in local storage)
