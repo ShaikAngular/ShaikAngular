@@ -124,6 +124,7 @@ export class MainComponent implements OnInit {
   this.service.getUsers().subscribe(res=>{
     console.log(res);
     let response1:any= res;
+    
     response1.map(a=>{
       a.isSelected = false;
       return a;
@@ -135,11 +136,19 @@ export class MainComponent implements OnInit {
     this.columnData[2].data = response1.map(a=>a.lastName);
     this.columnData[3].data = response1.map(a=>a.phoneNumber); 
     this.columnData[4].data = response1.map(a=>a.emailAddress);
+    if(this.userData){
+      response1 = [...this.userData,...response1]
+    }
+    
     this.userData = response1;
     this.userDataStore  = response1;
     console.log("this.userData-->",this.userData," this.columnData-->", this.columnData);
      })
   console.log("user data",this.userData);
+  }
+
+  loadMore(){
+    this.apiCall();
   }
   // apiCall()
   // {
