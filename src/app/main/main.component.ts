@@ -21,6 +21,7 @@ export class MainComponent implements OnInit {
      
   testForm : FormGroup = new FormGroup({});
   userData: any;
+  userDataStore: any;
   id: any;
   createRow = [];
   filterEnable = false;
@@ -135,6 +136,7 @@ export class MainComponent implements OnInit {
     this.columnData[3].data = response1.map(a=>a.phoneNumber); 
     this.columnData[4].data = response1.map(a=>a.emailAddress);
     this.userData = response1;
+    this.userDataStore  = response1;
     console.log("this.userData-->",this.userData," this.columnData-->", this.columnData);
      })
   console.log("user data",this.userData);
@@ -171,29 +173,44 @@ export class MainComponent implements OnInit {
   }
   
   applyFilter(){
-    const selectedColumn = this.columnData.filter(a=>a.isChecked)
-    console.log("selectedColumn",selectedColumn)
-    if(selectedColumn.length>0){
-      console.log("177",this.columnData, "selectedcolumn",selectedColumn[0].key);
-      this.filterData = this.userData.filter(a=>
-        {
-          selectedColumn.forEach((element,i)=>{
-            if(a[selectedColumn[i].key] == selectedColumn[i].selectedData)
-            {
+    let filterData1 = [...this.userDataStore];
+    this.columnData.forEach(
+     item=>{
+       console.log("iem",item)
+      
+       if(item.isChecked){
+        console.log("user dta",this.userDataStore)
+        filterData1 = filterData1.filter(a=>  a[item.key] == item.selectedData)
+         console.log("user dta",this.userData)
+         
+       }
+     }
+
+    )
+    this.userData = filterData1
+    // const selectedColumn = this.columnData.filter(a=>a.isChecked)
+    // console.log("selectedColumn",selectedColumn)
+    // if(selectedColumn.length>0){
+    //   console.log("177",this.columnData, "selectedcolumn",selectedColumn[0].key);
+    //   this.filterData = this.userData.filter(a=>
+    //     {
+    //       // selectedColumn.forEach((element,i)=>{
+    //         if(a[selectedColumn[0].key] == selectedColumn[0].selectedData)
+    //         {
               
-              console.log("a",a);
-              this.filterData = a
-              console.log("filterData", this.filterData);
-              return a;
+    //           console.log("a",a);
+    //           this.filterData = a
+    //           console.log("filterData", this.filterData);
+    //           return a;
               
-             }
-          })
+    //          }
+    //       // })
           
-        })
+    //     })
        
-      console.log("filterData", this.filterData);
-      this.userData = [...this.filterData];
-    } 
+    //   console.log("filterData", this.filterData);
+    //   this.userData = [...this.filterData];
+    // } 
     // else if(selectedColumn.length>1)
     // {
     //    const lenSelectedColumn =  selectedColumn.length
@@ -218,7 +235,8 @@ export class MainComponent implements OnInit {
   }
 
   resetFilter(){
-   this.apiCall();
+  //  this.apiCall();
+  this.userData = this.userDataStore
   }
 
   update(e:any,rowData:any){
