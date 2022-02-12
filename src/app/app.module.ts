@@ -14,13 +14,15 @@ import { ValidateComponent } from './validate/validate.component';
 import { MainComponent } from './main/main.component';
 import { UsersService } from 'src/services/users.service';
 import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
+import { JavascriptComponent } from './javascript/javascript.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ValidateComponent,
     MainComponent,
-    PdfviewerComponent
+    PdfviewerComponent,
+    JavascriptComponent
   ],
   imports: [
     BrowserModule,
