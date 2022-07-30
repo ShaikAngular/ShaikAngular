@@ -359,7 +359,14 @@ ls(){
   console.log(JSON.parse(localStorage.getItem('shaik')))
 }
 
+//foreach
 
+foreach(){
+  const array1 = ['a', 'b', 'c'];
+  array1.forEach(element=>
+    console.log('element->', element)
+    );
+}
 
 
 
